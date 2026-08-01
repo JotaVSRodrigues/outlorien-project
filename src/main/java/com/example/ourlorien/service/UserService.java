@@ -1,5 +1,8 @@
 package com.example.ourlorien.service;
 
+import com.example.ourlorien.entity.User;
+import com.example.ourlorien.enums.Role;
+import com.example.ourlorien.enums.Status;
 import com.example.ourlorien.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,12 +15,18 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    @PostMapping
-    public void register(String email) {
-        if (userRepository.existsByEmail(email)) {
-//            userRepository.save();
+    public User register(User user) {
+        if (userRepository.existsByEmail(user.getEmail())) {
+            // Irei lançar uma exceção personalizada futuramente
+            throw new RuntimeException("Email already registered.");
         }
 
-//        userRepository.save();
+        // Futuramente
+        // user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+
+        user.setRole(Role.USER);
+        user.setStatus(Status.ACTIVE);
+
+        return userRepository.save(user);
     }
 }

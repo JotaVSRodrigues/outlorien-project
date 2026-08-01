@@ -24,4 +24,12 @@ public class User {
     private Status status;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 }
