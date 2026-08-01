@@ -32,4 +32,12 @@ public class User {
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

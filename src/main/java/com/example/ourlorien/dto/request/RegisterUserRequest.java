@@ -8,10 +8,8 @@ public record RegisterUserRequest(
         @NotBlank
         @Size(max = 120)
         String name,
-
         @Email
         String email,
-
         @Size(min = 8, max = 100)
         String password
 ) {

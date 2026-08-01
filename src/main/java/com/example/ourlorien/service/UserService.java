@@ -1,5 +1,7 @@
 package com.example.ourlorien.service;
 
+import com.example.ourlorien.dto.request.RegisterUserRequest;
+import com.example.ourlorien.dto.response.UserResponse;
 import com.example.ourlorien.entity.User;
 import com.example.ourlorien.enums.Role;
 import com.example.ourlorien.enums.Status;
@@ -15,18 +17,25 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User register(User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            // Irei lançar uma exceção personalizada futuramente
+    public UserResponse register(RegisterUserRequest request) {
+        if (userRepository.existsByEmail(request.email())) {
+            // Haverá uma excessão personaliza futuramente
             throw new RuntimeException("Email already registered.");
         }
 
+        User user = new User();
+        user.setName(request.name());
+        user.setEmail(request.email());
+
         // Futuramente
-        // user.setPasswordHash(passwordEncoder.encode(user.getPassword()));
+        // user.setPasswordHash(passwordEncoder.encode(request.password()));
 
-        user.setRole(Role.USER);
-        user.setStatus(Status.ACTIVE);
+        User savedUser = userRepository.save(user);
 
-        return userRepository.save(user);
+        return new UserResponse(
+                savedUser.getId(),
+                savedUser.getName(),
+                savedUser.getEmail()
+        );
     }
 }

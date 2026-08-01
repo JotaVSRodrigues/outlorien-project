@@ -2,10 +2,11 @@ package com.example.ourlorien.controller;
 
 import com.example.ourlorien.dto.request.RegisterUserRequest;
 import com.example.ourlorien.dto.response.UserResponse;
-import com.example.ourlorien.entity.User;
 import com.example.ourlorien.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,10 @@ public class UserController {
         this.userService = userService;
     }
 
-//    public UserResponse register(@Valid @RequestBody RegisterUserRequest request) {
-//        return userService.register(request);
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterUserRequest request) {
+        UserResponse response = userService.register(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
 
 }
