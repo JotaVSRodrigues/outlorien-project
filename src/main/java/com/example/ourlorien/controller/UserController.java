@@ -2,14 +2,12 @@ package com.example.ourlorien.controller;
 
 import com.example.ourlorien.dto.request.RegisterUserRequest;
 import com.example.ourlorien.dto.response.UserResponse;
+import com.example.ourlorien.repository.UserRepository;
 import com.example.ourlorien.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
@@ -26,4 +24,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponse> findById (@PathVariable Long id) {
+        UserResponse response = userService.findById(id);
+        return ResponseEntity.ok(response);
+    }
 }

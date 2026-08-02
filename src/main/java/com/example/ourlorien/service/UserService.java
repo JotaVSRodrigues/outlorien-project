@@ -5,9 +5,13 @@ import com.example.ourlorien.dto.response.UserResponse;
 import com.example.ourlorien.entity.User;
 import com.example.ourlorien.enums.Role;
 import com.example.ourlorien.enums.Status;
+import com.example.ourlorien.exception.EmailAlreadyExistsException;
+import com.example.ourlorien.exception.ResourceNotFoundException;
 import com.example.ourlorien.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,7 +24,7 @@ public class UserService {
     public UserResponse register(RegisterUserRequest request) {
         if (userRepository.existsByEmail(request.email())) {
             // Haverá uma excessão personaliza futuramente
-            throw new RuntimeException("Email already registered.");
+            throw new EmailAlreadyExistsException("Email already registered.");
         }
 
         User user = new User();
@@ -40,4 +44,30 @@ public class UserService {
                 savedUser.getEmail()
         );
     }
+
+    public UserResponse findById(Long id) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        return new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail()
+        );
+    }
+//
+//    public List<UserResponse> listOfUsersByName(String name) {
+//        List<User> usersList = userRepository.findByNameContainingIgnoreCase(name);
+//
+//        if (usersList.isEmpty()) {
+//            throw new ResourceNotFoundException("Users containing '" + name + "' not found.");
+//        }
+//
+//        return new List<UserResponse>() {
+//            user.getId(),
+//            user.getName(),
+//            user.getEmail()
+//        }
+//    }
 }
