@@ -56,7 +56,11 @@ public class UserService {
                 user.getEmail()
         );
     }
+//    public static void main(String[] args) {
+//        SpringApplication.run(OurlorienApplication.class, args);
+//    }
 //
+//}
 //    public List<UserResponse> listOfUsersByName(String name) {
 //        List<User> usersList = userRepository.findByNameContainingIgnoreCase(name);
 //

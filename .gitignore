@@ -1,35 +1,58 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+# Backend
+backend/target/
+backend/.mvn/
+*.class
+### Backend (Spring Boot / Maven) ###
+backend/HELP.md
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+backend/.apt_generated
+backend/.classpath
+backend/.factorypath
+backend/.project
+backend/.settings
+backend/.springBeans
+backend/.sts4-cache
+
+### NetBeans ###
+backend/nbproject/private/
+backend/nbbuild/
+backend/dist/
+backend/nbdist/
+backend/.nb-gradle/
+backend/build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### Frontend (React / Vite) ###
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
 ### VS Code ###
 .vscode/
+
 ### .env files ###
 .env
+backend/.env
+frontend/.env
+frontend/.env.local
+
+### Sistema operacional ###
+.DS_Store
+Thumbs.db
+
+# geral
+.idea/
+.vscode/
+.DS_Store
